@@ -6,7 +6,7 @@ stage('prepration') {
 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/vyom00/nitro2.git']]])
 }
 stage('test') {
-nodejs('nodejs1') {
+nodejs('node') {
    sh 'npm install --only=dev'
    sh 'npm test'
 }
