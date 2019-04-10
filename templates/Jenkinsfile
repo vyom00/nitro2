@@ -1,0 +1,27 @@
+node {
+   stage('checkout') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/vyom00/nitro2.git'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+     
+	  }
+	 stage(' nodejs steps') {
+       nodejs('node') {
+       sh 'npm install --only=dev'
+       sh 'npm test'
+     }
+   } 
+   stage('docker login') {
+    // This step should not normally be used in your script. Consult the inline help for details.
+     sh 'docker login -u admin -p admin123 104.211.221.118:8083'
+   }
+     stage('Build & push image to nexus') {
+        script {
+            resigtry = "104.211.221.118:8083/app:${BUILD_NUMBER}"
+        def app  =  docker.build(resigtry)
+            app.push()
+            }
+      }
+ }
