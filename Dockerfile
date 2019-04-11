@@ -16,7 +16,7 @@ RUN npm run build:apps
 COPY . .
 
 FROM node:11-alpine as nodeprod
-COPY --from= /www/app/ /www/app/
+COPY --from=nodebuild /www/app/ /www/app/
 WORKDIR /www/app
 EXPOSE 3000
 
