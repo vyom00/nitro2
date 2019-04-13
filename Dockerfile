@@ -17,7 +17,7 @@ COPY . .
 
 FROM node:11-alpine as nodeprod
 ARG src=stage0
-COPY --from=nodeprod-$src /www/app/ /www/app/
+COPY --from=nodeprod-${src} /www/app/ /www/app/
 WORKDIR /www/app
 EXPOSE 3000
 
