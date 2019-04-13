@@ -1,4 +1,4 @@
-FROM node:11-alpine as nodebuild
+FROM node:11-alpine AS nodebuild
 
 RUN mkdir -p /www/app
 WORKDIR /www/app
@@ -15,7 +15,7 @@ RUN npm run install:apps
 RUN npm run build:apps
 COPY . .
 
-FROM node:11-alpine as nodeprod
+FROM node:11-alpine AS nodeprod
 COPY --from=nodebuild /www/app/ /www/app/
 WORKDIR /www/app
 EXPOSE 3000
